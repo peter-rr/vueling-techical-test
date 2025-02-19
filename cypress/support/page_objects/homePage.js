@@ -56,8 +56,39 @@ export class HomePage {
     }
 
     selectDriverAge(age) {
-
+        cy.get('#ct-compact-age-type').click()
+        cy.get('[type="radio"]').eq(1).check({force: true})
+        cy.get('[name="ageTextInput"]').type(age)
     }
+
+    searchCars() {
+        // cy.get('#searchCarsFormBtn-searchcars').invoke('removeAttr', 'target').click()
+        // cy.wait(2000) // Esperar para evitar race conditions
+        // cy.url().then(url => {
+        //     cy.visit(url) // Fuerza la navegación en Cypress
+        // })
+
+        // cy.intercept('GET', '**/vehicles*').as('searchResults')
+        // cy.get('#searchCarsFormBtn-searchcars').click()
+        // cy.wait('@searchResults')
+        // cy.url().should('include', '/book')
+
+        cy.get('#searchCarsFormBtn-searchcars').click();
+        cy.wait(2000); // Espera a que la navegación se complete
+        cy.url().then(url => {
+            cy.visit(url); // Vuelve a cargar la página de resultados en la misma pestaña
+        });
+          
+
+        // cy.get('#searchCarsFormBtn-searchcars').click()
+        // cy.location('pathname', { timeout: 10000 }).should('include', '/book')
+        // cy.url().should('include', '/vehicles')
+
+
+
+        // cy.get('#searchCarsFormBtn-searchcars').invoke('removeAttr', 'target').click()
+    }
+
     
 }
     

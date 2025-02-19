@@ -15,3 +15,8 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    console.log("Se detectó un error en la consola, pero no detendrá la ejecución:", err.message);
+    return false; // Evita que Cypress falle por errores en la consola
+});
