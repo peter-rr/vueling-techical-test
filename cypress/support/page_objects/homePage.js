@@ -72,11 +72,11 @@ export class HomePage {
         // cy.get('#searchCarsFormBtn-searchcars').click()
         // cy.wait('@searchResults')
         // cy.url().should('include', '/book')
-
-        cy.get('#searchCarsFormBtn-searchcars').click();
-        cy.wait(2000); // Espera a que la navegación se complete
-        cy.url().then(url => {
-            cy.visit(url); // Vuelve a cargar la página de resultados en la misma pestaña
+        
+        cy.get('#searchCarsFormBtn-searchcars').click()
+        cy.url({ timeout: 10000 }).should(url => {
+            console.log(url)
+            expect(url).to.include('/book')
         });
           
 

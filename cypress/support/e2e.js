@@ -17,6 +17,13 @@
 import './commands'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-    console.log("Se detectó un error en la consola, pero no detendrá la ejecución:", err.message);
-    return false; // Evita que Cypress falle por errores en la consola
+  return false; // Ignora errores de ejecución
 });
+
+Cypress.on('window:before:load', (win) => {
+    Object.defineProperty(win, 'self', {
+      get: () => {
+        return window.top
+      }
+    })
+})
